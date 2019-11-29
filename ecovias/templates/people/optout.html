@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block title %}Opt-Out Watcher{% endblock %}
+
+{% block content %}
+
+<h1>Opt-out</h1>
+{% if confirm == None %}
+<div class="row col-md-12">
+	<p>
+		Olá {{ name }}. Você confirma que deseja parar de receber as atualizações
+		do sistema Anchieta/Imigrantes em seu e-mail &lt;{{ email }}&gt; ?
+	</p>
+</div>
+
+<div class="row col-md-12">
+	<a href="{% url 'optout' token=token confirm=1 %}" class="btn btn-danger">Confirmar Exclusão</a>
+</div>
+
+{% elif confirm == '1' %}
+<div class="row col-md-12">
+	<p>
+		Ok {{ name }}, seu e-mail foi removido com sucesso. Se quiser
+		receber as notificações novamente, basta Aceitar abaixo novamente.
+	</p>
+</div>
+
+<div class="row col-md-12">
+	<a href="{% url 'optout' token=token confirm=2 %}" class="btn btn-success">Inscrever novamente</a>
+</div>
+
+{% else %}
+<div class="row col-md-12">
+	<p>
+		{{ name }}, seu e-mail foi autorizado novamente para receber
+		as notificações do sistema Anchieta/Imigrantes
+	</p>
+</div>
+{% endif %}
+
+{% endblock %}
+

@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ecovias import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('optout/<str:token>', views.optout, name='optout'),
+    path('optout/<str:token>/<confirm>', views.optout, name='optout'),
 ]

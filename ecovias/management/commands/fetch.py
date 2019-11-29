@@ -66,12 +66,13 @@ class Command(BaseCommand):
     def send_emails(self, params):
         people = People.objects.all().filter(optin=True)
 
-        msg_html = render_to_string(
-            '{}/ecovias/templates/email/notification.html'.format(settings.BASE_DIR),
-            params
-        )
-
         for person in people:
+            params['url_optout'] = '{}optout/{}'.format(settings.SITE_URL, person.uuid)
+            msg_html = render_to_string(
+                '{}/ecovias/templates/email/notification.html'.format(settings.BASE_DIR),
+                params
+            )
+
             send_mail(
                 'Alteração Sistema Anchieta/Imigrantes',
                 None,

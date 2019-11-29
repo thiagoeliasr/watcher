@@ -1,9 +1,11 @@
+import uuid
 from django.db import models
 
 class People(models.Model):
     name = models.CharField(max_length=150)
     email = models.CharField(max_length=150)
     optin = models.BooleanField(default=True)
+    uuid = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -60,3 +62,4 @@ class Log(models.Model):
     class Meta:
         verbose_name = 'Registro'
         verbose_name_plural = 'Registros'
+
