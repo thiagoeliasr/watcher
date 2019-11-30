@@ -52,7 +52,10 @@ class Command(BaseCommand):
                 'op_anchieta': Log.get_lane(op_anchieta),
                 'convoy_message': convoy_message,
                 'images': settings.IMAGES
-            })
+            },
+            last_status[0].convoy,
+            has_convoy
+        )
 
         log = Log(
             status = op_name,
@@ -63,8 +66,14 @@ class Command(BaseCommand):
 
         log.save()
 
-    def send_emails(self, params):
+    def send_emails(self, params, hadConvoy = False, hasConvoy = False):
         people = People.objects.all().filter(optin=True)
+
+        subject = 'Atualização: Anchieta/Imigrantes'
+        if hasConvoy and not(hadConvoy):
+            subject = '💩 COMBOIO 💩: Anchieta/Imigrantes'
+        elif not(hasConvoy) and hadConvoy:
+            subject = '🕺 FIM COMBOIO 🎉: Anchieta/Imigrantes'
 
         for person in people:
             params['url_optout'] = '{}optout/{}'.format(settings.SITE_URL, person.uuid)
@@ -74,7 +83,7 @@ class Command(BaseCommand):
             )
 
             send_mail(
-                'Alteração Sistema Anchieta/Imigrantes',
+                subject,
                 None,
                 settings.EMAIL_FROM,
                 [person.email],
