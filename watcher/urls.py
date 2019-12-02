@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('optout/<str:token>', views.optout, name='optout'),
     path('optout/<str:token>/<confirm>', views.optout, name='optout'),
+    path('optin/', views.optin, name='optin'),
 ]
