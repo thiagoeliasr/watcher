@@ -13,6 +13,7 @@ gevent==1.4.0
 gevent-socketio-hartwork==0.3.6.post201803091952
 gevent-websocket==0.10.1
 greenlet==0.4.15
+gunicorn==20.0.4
 html5lib==1.0.1
 idna==2.8
 itsdangerous==1.1.0
