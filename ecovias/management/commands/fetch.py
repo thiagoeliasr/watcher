@@ -35,7 +35,9 @@ class Command(BaseCommand):
         if not(last_status):
             send_email = True
 
+        last_convoy_status = False
         if len(last_status) > 0:
+            last_convoy_status = last_status[0].convoy
             if last_status[0].status != op_name:
                 send_email = True
             if last_status[0].operation != operation:
@@ -53,7 +55,7 @@ class Command(BaseCommand):
                 'convoy_message': convoy_message,
                 'images': settings.IMAGES
             },
-            last_status[0].convoy,
+            last_convoy_status,
             has_convoy
         )
 
