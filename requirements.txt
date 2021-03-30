@@ -6,7 +6,7 @@ Click==7.0
 cssmin==0.2.0
 cssprefixer==1.4.1
 cssutils==1.0.2
-Django==3.0.7
+Django==3.0.12
 docutils==0.15.2
 Flask==1.1.1
 Flask-Assets==0.12
